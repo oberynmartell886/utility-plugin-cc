@@ -1,0 +1,12 @@
+{
+  "name": "utility",
+  "description": "Utiliy general",
+  "version": "1.0.0",
+  "author": {
+    "name": "Oberyn"
+  },
+  "homepage": "https://github.com/oberynmartell886/utility-plugin-cc",
+  "repository": "https://github.com/oberynmartell886/utility-plugin-cc",
+  "license": "MIT",
+  "keywords": []
+}
