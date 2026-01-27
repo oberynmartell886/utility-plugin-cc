@@ -6,7 +6,7 @@
   },
   "plugins": [
     {
-      "name": "oberyn@utility",
+      "name": "oberyn-utility",
       "description": "Utility general plugin",
       "version": "1.0.0",
       "source": "./",
