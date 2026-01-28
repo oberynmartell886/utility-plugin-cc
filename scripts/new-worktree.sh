@@ -82,14 +82,12 @@ Se você quer recriar o worktree, remova o diretório primeiro:
   git worktree prune"
 fi
 
-# Verifica se a branch já existe (se sim, usa ela ao invés de criar nova)
+# Verifica se a branch já existe - se sim, retorna erro
 if git rev-parse --verify "${NEW_BRANCH}" > /dev/null 2>&1; then
-    info "A branch '${NEW_BRANCH}' já existe. Será utilizada a branch existente."
-    BRANCH_FLAG=""
-else
-    info "Criando nova branch '${NEW_BRANCH}' baseada em '${BASE_BRANCH}'..."
-    BRANCH_FLAG="-b"
+    error "A branch '${NEW_BRANCH}' já existe. Este comando é para criar novas branches."
 fi
+
+info "Criando nova branch '${NEW_BRANCH}' baseada em 'origin/${BASE_BRANCH}'..."
 
 # Cria o diretório de worktrees se não existir
 if [ ! -d "${WORKTREES_DIR}" ]; then
@@ -97,15 +95,16 @@ if [ ! -d "${WORKTREES_DIR}" ]; then
     mkdir -p "${WORKTREES_DIR}"
 fi
 
+# Faz fetch da branch base para garantir referência atualizada
+echo ""
+info "Atualizando referência origin/${BASE_BRANCH}..."
+git fetch origin "${BASE_BRANCH}"
+
 # Cria o worktree
 echo ""
 info "Criando worktree..."
 
-if [ -n "${BRANCH_FLAG}" ]; then
-    git worktree add "${NEW_WORKTREE_PATH}" ${BRANCH_FLAG} "${NEW_BRANCH}" "${BASE_BRANCH}"
-else
-    git worktree add "${NEW_WORKTREE_PATH}" "${NEW_BRANCH}"
-fi
+git worktree add -b "${NEW_BRANCH}" "${NEW_WORKTREE_PATH}" "origin/${BASE_BRANCH}"
 
 # =============================================================================
 # Copia arquivos de configuração do Claude e .env que não estão no git
