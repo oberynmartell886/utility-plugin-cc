@@ -107,6 +107,52 @@ else
     git worktree add "${NEW_WORKTREE_PATH}" "${NEW_BRANCH}"
 fi
 
+# =============================================================================
+# Copia arquivos de configuração do Claude e .env que não estão no git
+# =============================================================================
+CLAUDE_CONFIG_FILES=(".claude" "CLAUDE.md" ".mcp.json")
+SOURCE_DIR="$(pwd)"
+COPIED_FILES=()
+
+info "Verificando arquivos de configuração do Claude..."
+
+for config_file in "${CLAUDE_CONFIG_FILES[@]}"; do
+    # Verifica se o arquivo/diretório está tracked no git
+    if ! git ls-files --error-unmatch "$config_file" > /dev/null 2>&1; then
+        # Não está no git - verifica se existe no diretório de origem
+        if [ -e "${SOURCE_DIR}/${config_file}" ]; then
+            if [ -d "${SOURCE_DIR}/${config_file}" ]; then
+                cp -r "${SOURCE_DIR}/${config_file}" "${NEW_WORKTREE_PATH}/"
+            else
+                cp "${SOURCE_DIR}/${config_file}" "${NEW_WORKTREE_PATH}/"
+            fi
+            COPIED_FILES+=("$config_file")
+        fi
+    fi
+done
+
+# Copia arquivos .env* que não estão no git
+info "Verificando arquivos .env..."
+
+for env_file in "${SOURCE_DIR}"/.env*; do
+    # Verifica se o glob encontrou algum arquivo
+    [ -e "$env_file" ] || continue
+
+    env_filename=$(basename "$env_file")
+
+    # Verifica se o arquivo está tracked no git
+    if ! git ls-files --error-unmatch "$env_filename" > /dev/null 2>&1; then
+        cp "$env_file" "${NEW_WORKTREE_PATH}/"
+        COPIED_FILES+=("$env_filename")
+    fi
+done
+
+if [ ${#COPIED_FILES[@]} -gt 0 ]; then
+    info "Arquivos copiados para o worktree: ${COPIED_FILES[*]}"
+else
+    info "Nenhum arquivo adicional para copiar."
+fi
+
 echo ""
 success "Worktree criado com sucesso!"
 echo ""
