@@ -51,8 +51,10 @@ fi
 PROJECT_NAME=$(basename "$(pwd)")
 
 # Define os caminhos
-WORKTREES_DIR="../worktrees-${PROJECT_NAME}"
-NEW_WORKTREE_PATH="${WORKTREES_DIR}/${NEW_BRANCH}"
+WORKTREES_DIR="../.worktrees-${PROJECT_NAME}"
+# Substitui / por - no nome do diretório para evitar criação de subdiretórios
+WORKTREE_DIR_NAME="${NEW_BRANCH//\//-}"
+NEW_WORKTREE_PATH="${WORKTREES_DIR}/${WORKTREE_DIR_NAME}"
 
 info "Projeto: ${PROJECT_NAME}"
 info "Nova branch: ${NEW_BRANCH}"
