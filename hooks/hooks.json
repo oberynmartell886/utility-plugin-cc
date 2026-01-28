@@ -5,7 +5,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/skill-forced-eval-hook.sh"
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/skill-forced-eval-hook.sh"
+          },
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/subagent-forced-eval-hook.sh"
           }
         ]
       }
