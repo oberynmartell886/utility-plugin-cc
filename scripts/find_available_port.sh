@@ -1,5 +1,4 @@
 #!/bin/bash
-source "$(dirname "${BASH_SOURCE[0]}")/ensure-permissions.sh"
 
 if [ -z "$1" ]; then
     echo "Uso: $0 <porta_inicial> [max_tentativas]" >&2

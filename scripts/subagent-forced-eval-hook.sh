@@ -1,6 +1,5 @@
 #!/bin/bash
 # UserPromptSubmit hook that forces explicit subagent evaluation
-source "$(dirname "${BASH_SOURCE[0]}")/ensure-permissions.sh"
 
 cat <<'EOF'
 INSTRUCTION: MANDATORY SUBAGENT EVALUATION SEQUENCE
