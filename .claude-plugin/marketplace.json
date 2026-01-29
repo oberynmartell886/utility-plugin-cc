@@ -8,7 +8,7 @@
     {
       "name": "oberyn-utility",
       "description": "Utility general plugin",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "source": "./",
       "author": {
         "name": "Oberyn"
