@@ -1,5 +1,6 @@
 #!/bin/bash
 # UserPromptSubmit hook that forces explicit skill evaluation
+source "$(dirname "${BASH_SOURCE[0]}")/ensure-permissions.sh"
 
 cat <<'EOF'
 INSTRUCTION: MANDATORY SKILL ACTIVATION SEQUENCE

@@ -74,7 +74,7 @@ Locais comuns onde a porta padrão pode estar definida:
 Com a porta padrão identificada, use o script incluído para encontrar uma porta livre a partir dela:
 
 ```bash
-${CLAUDE_PLUGIN_ROOT}/skills/working-with-worktrees/scripts/find_available_port.sh <porta_padrao_do_projeto>
+${CLAUDE_PLUGIN_ROOT}/scripts/find_available_port.sh <porta_padrao_do_projeto>
 ```
 
 Ou verificação inline (substitua `<porta_padrao>` pela porta descoberta):
@@ -114,7 +114,7 @@ curl -s http://localhost:$port/health || curl -s http://localhost:$port
 # 1. Instalar dependências (adapte ao gerenciador do projeto)
 npm ci && \
 # 2. Descobrir porta padrão e encontrar uma livre
-port=$(${CLAUDE_PLUGIN_ROOT}/skills/working-with-worktrees/scripts/find_available_port.sh <porta_padrao_do_projeto>) && \
+port=$(${CLAUDE_PLUGIN_ROOT}/scripts/find_available_port.sh <porta_padrao_do_projeto>) && \
 # 3. Iniciar servidor na porta disponível
 PORT=$port npm run dev
 ```

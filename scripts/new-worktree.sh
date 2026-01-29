@@ -5,6 +5,7 @@
 # Script para criar git worktrees de forma organizada por projeto
 # Uso: ./new-worktree.sh <nome-nova-branch> <branch-base>
 # =============================================================================
+source "$(dirname "${BASH_SOURCE[0]}")/ensure-permissions.sh"
 
 set -e
 

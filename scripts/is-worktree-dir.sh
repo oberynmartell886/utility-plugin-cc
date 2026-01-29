@@ -1,5 +1,6 @@
 #!/bin/bash
 # SessionStart hook that detects worktree environment and guides skill activation
+source "$(dirname "${BASH_SOURCE[0]}")/ensure-permissions.sh"
 
 GIT_DIR=$(git rev-parse --git-dir 2>/dev/null)
 
